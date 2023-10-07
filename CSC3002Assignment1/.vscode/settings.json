@@ -1,0 +1,10 @@
+{
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "stack": "cpp",
+        "array": "cpp"
+    },
+    "files.autoSave": "afterDelay"
+}
