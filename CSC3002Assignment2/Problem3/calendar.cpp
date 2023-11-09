@@ -130,8 +130,9 @@ Month operator++(Month &month, int)
    if (month == DECEMBER)
    {
       month = Month(1);
-   }
+   }else{
    month = Month(month + 1);
+   }
    return result;
 }
 
