@@ -4,17 +4,17 @@
             "name":"win",
             "includePath":[
                 "${workspaceFolder}/**",
-                /*此处修改为 include 对应的路径*/
-                "D:/cpp_Mingw/include",
-                "D:/OpenCV/build/include",
-                "D:/OpenCV/build/include/opencv2"
+                // change these three direcotories to your corresponding directory. 
+                "D:/cpp_Mingw-w64/mingw64/include", // include folder of what we have downloaded about compiler 
+                "D:/OpenCV/build/include", // include folder of the original build of opencv
+                "D:/OpenCV/build/include/opencv2" // "opencv2" in the "include" folder of the original build of opencv
             ],
             "defines":[
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            /*此处修改为本机 gcc 编译器所在的对应路径*/
+            // Change this directory to your g++.exe directory of compiler
             "compilerPath":"D:\\cpp_Mingw-w64\\mingw64\\bin\\g++.exe",
             "cStandard":"c11",
             "cppStandard":"c++11",

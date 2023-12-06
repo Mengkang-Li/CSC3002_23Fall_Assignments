@@ -12,6 +12,7 @@
             "environment": [], 
             "externalConsole": false, 
             "MIMode": "gdb", 
+            // Change this directory to your corresponding gdb.exe.
             "miDebuggerPath": "D:\\cpp_Mingw-w64\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {

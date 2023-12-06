@@ -1,4 +1,5 @@
 #include "svm_mnist.h"
+
 void mnistTrain()
 {
     // 读取训练样本集
@@ -161,7 +162,7 @@ void mnistAccuracyTest()
         Mat predict_mat = Mat::zeros(1, imgVectorLen, CV_32FC1);
         memcpy(predict_mat.data, testFeatures.data + i * imgVectorLen * sizeof(float), imgVectorLen * sizeof(float));
         // 预测
-        float predict_label = svm -> predict(predict_mat);
+        float predict_label = svm->predict(predict_mat);
         // 真实的样本标签
         float truth_label = testLabels.at<int>(i);
         // 比较判定是否预测正确
@@ -259,7 +260,7 @@ void randomImageTest()
         Mat predict_mat = Mat::zeros(1, imgVectorLen, CV_32FC1);
         memcpy(show_mat.data, testFeatures.data + index * imgVectorLen * sizeof(float), imgVectorLen * sizeof(float));
         memcpy(predict_mat.data, testFeatures.data + index * imgVectorLen * sizeof(float), imgVectorLen * sizeof(float));
-        float response = svm -> predict(predict_mat);
+        float response = svm->predict(predict_mat);
 
         imshow("test", show_mat);
         cout << "标签值为" << response << endl;

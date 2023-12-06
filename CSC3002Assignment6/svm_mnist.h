@@ -13,8 +13,7 @@ using namespace std;
 
 void mnistAccuracyTest();
 void randomImageTest();
-int  reverseInt(int i);
+int reverseInt(int i);
 void mnistTrain();
-
 
 #endif // SVM_MNIST_H
