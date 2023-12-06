@@ -1,18 +1,25 @@
 {
-  "configurations": [
-    {
-      "name": "windows-gcc-x64",
-      "includePath": [
-        "${workspaceFolder}/**"
-      ],
-      "compilerPath": "D:/cpp_Mingw-w64/mingw64/bin/gcc.exe",
-      "cStandard": "${default}",
-      "cppStandard": "${default}",
-      "intelliSenseMode": "windows-gcc-x64",
-      "compilerArgs": [
-        ""
-      ]
-    }
-  ],
-  "version": 4
+    "configurations":[
+        {
+            "name":"win",
+            "includePath":[
+                "${workspaceFolder}/**",
+                /*此处修改为 include 对应的路径*/
+                "D:/cpp_Mingw/include",
+                "D:/OpenCV/build/include",
+                "D:/OpenCV/build/include/opencv2"
+            ],
+            "defines":[
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            /*此处修改为本机 gcc 编译器所在的对应路径*/
+            "compilerPath":"D:\\cpp_Mingw-w64\\mingw64\\bin\\g++.exe",
+            "cStandard":"c11",
+            "cppStandard":"c++11",
+            "intelliSenseMode":"clang-x64"
+        }
+    ],
+    "version":4
 }

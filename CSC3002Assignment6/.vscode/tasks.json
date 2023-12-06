@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "opencv4.8.0 compile task",
+            "command": "D:\\cpp_Mingw-w64\\mingw64\\bin\\g++.exe",
+            "type": "shell",
+            "args": [
+                "-g",
+                "-std=c++11",
+                "${file}",
+                "${fileDirname}\\svm_mnist.cpp",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-I", "D:/opencv/build/x64/mingw/install/include/",
+                "-I", "D:/opencv/build/x64/mingw/install/include/opencv2/",
+                "-L", "D:/opencv/build/x64/mingw/install/x64/mingw/bin/lib**"
+            ],
+            "options": {
+                "cwd": "D:\\cpp_Mingw-w64\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        }
+    ]
+}
