@@ -10,7 +10,7 @@
                 "-g",
                 "-std=c++11",
                 "${file}",
-                "${fileDirname}\\svm_mnist.cpp",
+                "${fileDirname}\\algo_svm_mnist.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 // Change these three directories to the corresponding directories in the newly created "MinGw"'s install directory.

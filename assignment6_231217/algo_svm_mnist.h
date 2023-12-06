@@ -1,5 +1,5 @@
-#ifndef SVM_MNIST_H
-#define SVM_MNIST_H
+#ifndef ALGO_SVM_MNIST_H
+#define ALGO_SVM_MNIST_H
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -11,9 +11,12 @@ using namespace cv;
 using namespace ml;
 using namespace std;
 
-void mnistAccuracyTest();
-void randomImageTest();
-int reverseInt(int i);
-void mnistTrain();
+Mat loadImgs(string s);
+Mat loadLabels(string s);
+void trainMnist();
+void testMnist();
+void randomTest();
 
-#endif // SVM_MNIST_H
+int reverse(int m);
+
+#endif

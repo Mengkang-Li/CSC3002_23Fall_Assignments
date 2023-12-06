@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "opencv debug",
+            "name": "opencv4.8.0 compile task",
             "type": "cppdbg",  
             "request": "launch",  
             "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
