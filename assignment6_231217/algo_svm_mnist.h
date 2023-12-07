@@ -15,8 +15,8 @@ Mat loadImgs(string s);
 Mat loadLabels(string s);
 void trainMnist();
 void testMnist();
-void randomTest();
-
+int randomTest(int m);
 int reverse(int m);
+void getWrongOnes();
 
 #endif

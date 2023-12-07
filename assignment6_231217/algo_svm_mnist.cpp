@@ -22,12 +22,7 @@ Mat loadImgs(string s){
     Use four number to get the information. 
     */
     ifstream is(s, ios::binary);
-    if(!is.good()){
-        cout << "Read images failed." << endl;
-        Mat ans = Mat::zeros(0, 0, CV_16F);
-        return ans;
-    }
-    cout << "Loading successfully." << endl;
+
     // read data information
     int info;
     is.read((char*) &info, sizeof(info));
@@ -75,10 +70,6 @@ Mat loadLabels(string s){
 
     // Load the file.
     ifstream is(s, ios::binary);
-    if(!is.good()){
-        cout << "Load labels failed." << endl;
-    }
-
     // read file info
     int info;
     is.read((char*) &info, sizeof(info));
@@ -96,7 +87,6 @@ Mat loadLabels(string s){
     Mat mid = Mat::zeros(numOfLabels, 1, CV_8SC1);
     is.read((char*) mid.data, numOfLabels);
     mid.convertTo(ans, CV_32SC1);
-    cout << "loading labels successfully." << endl;
     return ans;
 }
 
@@ -156,7 +146,8 @@ void testMnist(){
     cout << "Accuracy is: " << accuracy * 100 << "%" << endl;
 }
 
-void randomTest(){
+int randomTest(int m){
+
     /*
     This function is used to get a random sequence number, then show the corresponding image, prediction and the real label.
     */
@@ -166,6 +157,46 @@ void randomTest(){
     // load the model
     svm = Algorithm::load<SVM>("svm_mnist.xml");
 
+    // get some para of the data set 
+    ifstream is("data/t10k-images.idx3-ubyte");
+    int colOfImg, rowOfImg;
+    is.ignore(2 * sizeof(colOfImg));
+    is.read((char*) &rowOfImg, sizeof(rowOfImg));
+    is.read((char*) &colOfImg, sizeof(colOfImg));
+    rowOfImg = reverse(rowOfImg);
+    colOfImg = reverse(colOfImg);
+    is.close();
+
+    // load data
+    Mat imgs = loadImgs("data/t10k-images.idx3-ubyte");
+    Mat labels = loadLabels("data/t10k-labels.idx1-ubyte");
+
+    // start testing 
+    Mat certain = Mat::zeros(1, rowOfImg * colOfImg, CV_32FC1);        
+    memcpy(certain.data, imgs.data + m * rowOfImg * colOfImg * sizeof(float), rowOfImg * colOfImg * sizeof(float));
+    int prediction = (int) svm -> predict(certain);
+    return prediction;
+
+}
+
+void getWrongOnes(){
+    /*
+    This function is used to see which part of the set is predicted not correctly. 
+    */
+    Ptr<SVM> svm = SVM::create();
+
+    // load the model
+    svm = Algorithm::load<SVM>("svm_mnist.xml");
+
+    Mat imgs = loadImgs("data/t10k-images.idx3-ubyte");
+    Mat labels = loadLabels("data/t10k-labels.idx1-ubyte");
+    Mat predictions;
+    svm -> predict(imgs, predictions);
+    for(int i = 0; i < predictions.rows; i++){
+    if((int) predictions.at<float>(i, 0) != labels.at<int>(i, 0)){
+            cout << i << endl;
+        }
+    }
     // load data
     ifstream is("data/t10k-images.idx3-ubyte");
     int colOfImg, rowOfImg;
@@ -175,20 +206,14 @@ void randomTest(){
     rowOfImg = reverse(rowOfImg);
     colOfImg = reverse(colOfImg);
     is.close();
-    Mat imgs = loadImgs("data/t10k-images.idx3-ubyte");
-    Mat labels = loadLabels("data/t10k-labels.idx1-ubyte");
-    cout << "Type in a number to see the image." << endl;
     while(!cin.eof()){
         int m;
         cin >> m;
-        Mat certain = Mat::zeros(1, rowOfImg * colOfImg, CV_32FC1);        
-        Mat sample_img = Mat::zeros(rowOfImg, colOfImg, CV_32FC1);
-        memcpy(sample_img.data, imgs.data + m * rowOfImg * colOfImg * sizeof(float), rowOfImg * colOfImg * sizeof(float));
-        memcpy(certain.data, imgs.data + m * rowOfImg * colOfImg * sizeof(float), rowOfImg * colOfImg * sizeof(float));
-        int prediction = (int) svm -> predict(certain);
-        string s = "m = " + to_string(m) + " with prediction = " + to_string(prediction) + ", lebel = " + to_string(labels.at<int>(m, 0));
+        Mat sampleImg = Mat::zeros(rowOfImg, colOfImg, CV_32FC1);
+        memcpy(sampleImg.data, imgs.data + m * rowOfImg * colOfImg * sizeof(float), rowOfImg * colOfImg * sizeof(float));
+        string s = "m = " + to_string(m) + " with prediction = " + to_string((int) predictions.at<float>(m, 0)) + ", lebel = " + to_string(labels.at<int>(m, 0));
         cout << s << endl;
-        imshow(s, sample_img);
+        imshow(s, sampleImg);
         waitKey(500);
     }
 }
