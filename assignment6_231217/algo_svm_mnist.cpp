@@ -101,8 +101,8 @@ void trainMnist(){
     // set the parameters
     svm->setType(SVM::C_SVC);
     svm->setKernel(SVM::RBF);
-    svm->setC(10.0);
-    svm->setGamma(0.01);
+    svm->setC(5.0);
+    svm->setGamma(0.018);
     svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER + TermCriteria::EPS, 200, FLT_EPSILON));
 
     // load data
